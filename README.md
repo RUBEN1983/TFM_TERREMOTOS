@@ -1,8 +1,7 @@
 ---
-title: "**TFM TERREMOTOS**"
-author: "*RUBEN SAIZ GARCIA*"
+title: "TFM TERREMOTOS"
+author: "RUBEN SAIZ GARCIA"
 date: "12 de junio de 2017"
-output: html_document
 ---
 
 
