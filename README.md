@@ -8,7 +8,7 @@ output: html_document
 
 
 
-####**1.-INTRODUCCION AL PROYECTO**####
+**1.-INTRODUCCION AL PROYECTO**
 
 
 
