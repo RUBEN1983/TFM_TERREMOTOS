@@ -38,3 +38,20 @@ Tanto para la segmentación como la predicción usaremos dos criterios para dete
 
 * Países
 
+
+
+
+
+
+**2.-DESCRIPCION DE LOS DATOS DE ENTRADA**
+
+
+
+
+Como hemos indicado en el anterior apartado, los datos de los terremotos para realizar el trabajo han sido extraídos de la web http://www.seismicportal.eu/. En este portal disponemos de una relación de terremotos desde 1998 hasta hoy; actualmente podemos encontrar más de 676.000 eventos. Para este proyecto utilizaremos los terremotos comprendidos entre 1998 y 2016. Si accedemos a este portal:
+
+
+![http://www.seismicportal.eu/](imagenes/seismic_portal.jpg)
+
+
+Desde este momento, nuestro objetivo es poder visualizar esta información con una tabla, o mejor dicho, en un dataframe de Python.
