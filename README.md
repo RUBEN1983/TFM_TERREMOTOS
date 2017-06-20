@@ -54,4 +54,19 @@ Como hemos indicado en el anterior apartado, los datos de los terremotos para re
 ![http://www.seismicportal.eu/](imagenes/seismic_portal.jpg)
 
 
-Desde este momento, nuestro objetivo es poder visualizar esta información con una tabla, o mejor dicho, en un dataframe de Python.
+Desde este momento, nuestro primer objetivo es poder visualizar esta información en una tabla, o mejor dicho, en un DataFrame de Python.
+
+
+El código para la creación del DataFrame de Python se encuentra descrito en el fichero __**web_scrapping_dataset_terremotos.ipynb**__, en la carpeta **python**.
+
+
+El portal http://www.seismicportal.eu/ nos ofrece varios WebServices para extraer datos de terremotos en formatos JSON, XML y TXT. Usaremos el WebService en XML para extraer estos datos; sin embargo, tiene la limitación de extraer un máximo de 1000 eventos (terremotos) en cada consulta.
+
+
+Para salvar esta limitación, se llamará al WebService tantas veces como días hay comprendidos entre el 1 de Enero de 1998 y el 31 de Diciembre de 2016 (lo que hace un total de 6940 llamadas); ninguno de esos días supera la limitación de 1000 eventos.
+
+
+Por ejemplo, la URL del WebService para extraer los terremotos del 15 de Enero de 1998 sería http://www.seismicportal.eu/fdsnws/event/1/query?start=1998-01-15&end=1998-01-16. Para cada llamada al WebService se generará un fichero XML, cuyo nombre para esta misma fecha sería __**1998-01-15_1998-01-16.xml**__. El listado de ficheros XML generados se encuentra alojado en la carpeta __**xml_files**__; en esta carpeta se encuentra un fichero comprimido ZIP por cada año entre 1998 y 2016, incluyendo cada ZIP un fichero XML por cada día.
+
+
+
