@@ -69,4 +69,34 @@ Para salvar esta limitación, se llamará al WebService tantas veces como días 
 Por ejemplo, la URL del WebService para extraer los terremotos del 15 de Enero de 1998 sería http://www.seismicportal.eu/fdsnws/event/1/query?start=1998-01-15&end=1998-01-16. Para cada llamada al WebService se generará un fichero XML, cuyo nombre para esta misma fecha sería __**1998-01-15_1998-01-16.xml**__. El listado de ficheros XML generados se encuentra alojado en la carpeta __**xml_files**__; en esta carpeta se encuentra un fichero comprimido ZIP por cada año entre 1998 y 2016, incluyendo cada ZIP un fichero XML por cada día.
 
 
+El siguiente paso sería procesar los ficheros para montar el DataFrame en Python. Aquí debemos realizar un estudio del formato de los ficheros XML; no todos los terremotos tienen los mismos campos, por lo que tendremos que diseñar una función que recupere todos los campos atendiendo a estos diferentes formatos. Principalmente, hemos encontrado 4 formatos distintos.
+
+
+![Cuatro campos](imagenes/cuatro_campos.jpg)
+
+
+![Cinco campos](imagenes/cinco_campos.jpg)
+
+
+![Seis campos](imagenes/seis_campos.jpg)
+
+
+![Siete campos](imagenes/siete_campos.jpg)
+
+
+Además, se han encontrado un pequeño número de ficheros donde aparecían terremotos con formatos específicos. Han sido adaptados para que aparezcan como uno de estos 4 formatos.
+
+
+Los campos que mas información tienen son "origin" y "magnitude".
+
+
+![Origin](imagenes/origin.jpg)
+
+![Magnitude](imagenes/magnitude.jpg)
+
+
+EL siguiente paso será crear una función que generará los datos de los ficheros XML en una lista de Python; posteriormente, esta lista se convertirá en el DataFrame que usamos como base del proyecto. Guardamos el DataFrame en el fichero __**terremotos.csv.bz2**__, en la carpeta __**files**__.
+
+
+Las columnas del DataFrame se encuentran explicadas en el documento __**Campos_del_dataframe_terremotos.xls**__, en la carpeta __**files**__, en verde aquellas columnas que se crean al importar los datos iniciales; en amarillo, aquellas que se crean posteriormente aplicando funciones a estas mismas columnas iniciales.
 
