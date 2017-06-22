@@ -95,7 +95,22 @@ Los campos que mas información tienen son "origin" y "magnitude".
 ![Magnitude](imagenes/magnitude.jpg)
 
 
-EL siguiente paso será crear una función que generará los datos de los ficheros XML en una lista de Python; posteriormente, esta lista se convertirá en el DataFrame que usamos como base del proyecto. Guardamos el DataFrame en el fichero __**terremotos.csv.bz2**__, en la carpeta __**files**__.
+El siguiente paso será crear una función que generará los datos de los ficheros XML en una lista de Python; posteriormente, esta lista se convertirá en el DataFrame que usamos como base del proyecto. Guardamos el DataFrame en el fichero __**terremotos.csv.bz2**__, en la carpeta __**files**__.
+
+
+Una vez tenemos el DataFrame inicial creado, vamos a generar varias columnas para interpretar mejor los datos por estas razones:
+
+* Aparecen varios campos en formatos poco descriptivos, principalmente la fecha y la región del terremoto. Los transformaremos a un formato más amigable.
+
+* Modificaremos latitud y longitud para que aparezcan solo sus partes enteras (sin decimales) e incluiremos ambas en una misma columna.
+
+* Crearemos una función para extraer el país donde se ha producido el terremoto. Coordenadas y países serán de vital importancia para próximas fases del proyecto.
+
+
+El código para la creación de estas nuevas columnas se encuentra descrito en el fichero __**transformacion_dataset_terremotos**__, en la carpeta __**python**__. Para crear una columna con el nombre del país necesitamos tres ficheros csv adicionales; __**paises.csv**__, __**estados_usa.csv**__ y __**regiones_sin_nombre_pais**__, los tres almacenados en la carpeta __**files**__.
+
+
+El fichero resultante después de añadir las columnas se encuentra se llama __**terremotos_long.csv.bz2**__, en la carpeta __**files**__. Los XML no se pueden almacenar en GitHub pues ocuparían más de 1Gb, por lo que para ejecutar el proyecto lo idóneo sería partir de uno de los dos ficheros, __**terremotos.csv.bz2**__ ejecutando __**transformacion_dataset_terremotos**__, o directamente __**terremotos_long.csv.bz2**__.
 
 
 Las columnas del DataFrame se encuentran explicadas en el documento __**Campos_del_dataframe_terremotos.xls**__, en la carpeta __**files**__, en verde aquellas columnas que se crean al importar los datos iniciales; en amarillo, aquellas que se crean posteriormente aplicando funciones a estas mismas columnas iniciales.
