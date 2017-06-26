@@ -7,7 +7,7 @@ date: "12 de junio de 2017"
 
 
 
-**1.-INTRODUCCION AL PROYECTO**
+**1.-INTRODUCCIÓN AL PROYECTO.**
 
 
 
@@ -43,7 +43,7 @@ Tanto para la segmentación como la predicción usaremos dos criterios para dete
 
 
 
-**2.-DESCRIPCION DE LOS DATOS DE ENTRADA**
+**2.-DESCRIPCIÓN DE LOS DATOS DE ENTRADA.**
 
 
 
@@ -114,4 +114,79 @@ El fichero resultante después de añadir las columnas se encuentra se llama __*
 
 
 Las columnas del DataFrame se encuentran explicadas en el documento __**Campos_del_dataframe_terremotos.xls**__, en la carpeta __**files**__, en verde aquellas columnas que se crean al importar los datos iniciales; en amarillo, aquellas que se crean posteriormente aplicando funciones a estas mismas columnas iniciales.
+
+
+
+
+
+
+**3.-METODOLOGÍA.**
+
+
+
+
+Una vez conocidos lo que van a ser los datos de entrada de nuestro proyecto, llega el momento de "ponerse manos a la obra" con los algoritmos Data Science. Recordamos los objetivos que indicamos en la introducción:
+
+
+* Establecer una segmentación por zonas geográficas de acuerdo a la mayor o menor incidencia de la actividad sísmica.
+
+* Establecer una predicción anual de número de terremotos por zonas geográficas.
+
+* Tanto la segmentación como la predicción se calcularán atendiendo a dos criterios geográficos: coordenadas y países.
+
+
+__3.1.-Segmentación de actividad sísmica por zonas geográficas.__
+
+
+Para realizar la segmentación nos basaremos principalmente en dos algoritmos: el modelo de segmentación RFM y el algoritmo de Clustering (agrupamiento) K-means.
+
+
+El modelo de segmentación RFM (Recencia, Frecuencia y Monetización) se usa principalmente en marketing para separar entre grupos de clientes dentro de un mercado; aquí lo adaptaremos para el caso de los terremotos.
+
+
+Pero, ¿en qué consiste la segmentación RFM? Básicamente, se basa en tres criterios bien diferenciados (cada uno de ellos se corresponde con la iniciales RFM):
+
+
+* __Recencia:__ Tiempo que lleva un cliente sin comprar; en nuestro caso, tiempo que lleva sin producirse un terremoto en una zona geográfica.
+
+* __Frecuencia:__ Número de ocasiones que el cliente compra: en nuestro caso, número de terremotos que suceden en una zona geográfica.
+
+* __Monetización:__ Dinero que gasta el cliente; en nuestro caso, utilizaremos la magnitud de los terremotos en una zona geográfica.
+
+
+Resumiendo, realizaremos una analogía entre clientes y zonas geográficas (primero coordenadas, luego países) para segmentar cada zona geográfica en base al tiempo que lleva sin producirse un terremoto, el número de terremotos que se producen y la magnitud de los mismos.
+
+
+Una vez dispongamos de una tabla con valores donde cada coordenada geográfica o país tenga su propia caracterización RFM, pasaremos a aplicar el algoritmo K-means. K-means es un método de aprendizaje no supervisado, muy utilizado para hacer clustering cuando todas las variables son de tipo cuantitativo.
+
+
+La idea de K-means consiste en crear k centroides (tantos centroides como grupos tengamos) y relacionar cada punto con su centroide más cercano. Una vez se le asigna un centroide a un punto, se vuelven a recalcular los centroides y se vuelven a asignar los puntos al centroide más próximo. Este proceso se sigue repitiendo hasta que llega un punto que no hay cambios en el cálculo de centroides.
+
+
+Gráficamente:
+
+
+![K-Means](imagenes/kmeans.gif)
+
+
+
+Primero vamos a realizar la segmentación en base a las coordenadas geográficas. Para calcular la segmentación tenemos que tener una tabla similar a esta, pero con todos los pares de coordenadas correspondientes a longitudes entre -180 y +180, y latitudes entre -90 y +90.
+
+| coordenadas | RECENCIA | FRECUENCIA | MAGNITUD |
+| :---------: | :------: | :--------: | :------: |
+| -0,-11      | 262      | 1          | 5.1      |
+| -0,-16      | 494      | 3          | 4.8      |
+
+
+Los valores extremos de longitud (-180 y +180) y latitud (-90 y +90) se han modificado por los inmediatamente anteriores; longitud (-179 y +179) y latitud (-89 y +89). Los valores posibles de longitud entre -179 y +179 son 360 (hay que tener en cuenta que tanto para longitud como latitud estarán los valores -0 y +0), y para latitud entre -89 y +89 son 180. Si comprobamos las posibles combinaciones, obtenemos un total de 64800 pares de coordenadas latitud-longitud. Por tanto, buscaremos una tabla de 64800 filas, y 4 columnas (coordenadas, RECENCIA, FRECUENCIA, MAGNITUD).
+
+
+Para obtener esta tabla seguiremos estos pasos:
+
+* 1) Construiremos una tabla inicial con todos los posibles valores de coordenadas donde Recencia, Frecuencia y Magnitud sean 0.
+
+* 2) A partir de los datos de terremotos, construiremos una tabla con valores Recencia, Frecuencia y Magnitud. Hay que tener en cuenta que no tenemos datos para todos los pares de coordenadas.
+
+* 3) Fusionaremos las dos tablas previas de modo que los pares de coordenadas solo aparezcan una vez.
+
 
