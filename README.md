@@ -190,3 +190,16 @@ Para obtener esta tabla seguiremos estos pasos:
 * 3) Fusionaremos las dos tablas previas de modo que los pares de coordenadas solo aparezcan una vez.
 
 
+En el fichero __**coordenadas_RFM_ceros**__ en la carpeta __**python**__ encontramos el código con la tabla inicial de coordenadas con Recencia, Frecuencia y Magnitud a 0. Guardamos el DataFrame creado como __**coordenadas_RFM_ceros.csv**__ en la carpeta __**files**__.
+
+
+Para construir un DataFrame con Recencia, Frecuencia y Magnitud a partir de los valores de los terremotos tenemos primero que extraer los valores de fecha, coordenadas y magnitud de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**coordenadas_RFM_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**coordenadas_RFM_valores.csv.bz2**__ en la carpeta __**files**__.
+
+
+Una vez preparados estos ficheros, haremos la segmentación K-means. En este punto pasaremos a trabajar con R en vez de Python. La segmentación RFM con todas las coordenadas se desarrollará en el fichero __**Segmentacion_RFM_KMeans_coordenadas.R**__ en la carpeta __**R**__. ¿Qué haremos en este fichero? Primeramente, cargaremos los datos de __**coordenadas_RFM_valores.csv.bz2**__ y construiremos una tabla análoga a __**coordenadas_RFM_ceros.csv**__; fusionaremos estas dos tablas y sobre la tabla resultante (donde cada coordenada aparecerá un única vez) aplicaremos K-Means.
+
+
+Una vez realizado el algoritmo K-means obtenemos 8 segmentos. En el próximo punto de la memoria interpretaremos estos resultados. Los datos con la segmentación RFM y el número de segmento se almacenan en el fichero __**terremotos_coordenadas_RFM**__ en la carpeta __**files**__.
+
+
+![K-Means coordenadas](imagenes/Kmeans_coordenadas.jpg)
