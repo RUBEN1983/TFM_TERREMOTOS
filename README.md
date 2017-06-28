@@ -170,7 +170,7 @@ Gráficamente:
 
 
 
-Primero vamos a realizar la segmentación en base a las coordenadas geográficas. Para calcular la segmentación tenemos que tener una tabla similar a esta, pero con todos los pares de coordenadas correspondientes a longitudes entre -180 y +180, y latitudes entre -90 y +90.
+Primero vamos a realizar la segmentación en base a las coordenadas geográficas. Para calcular la segmentación tenemos que tener una tabla similar a la indicada más abajo, pero con todos los pares de coordenadas correspondientes a longitudes entre -180 y +180, y latitudes entre -90 y +90.
 
 | coordenadas | RECENCIA | FRECUENCIA | MAGNITUD |
 | :---------: | :------: | :--------: | :------: |
@@ -196,10 +196,35 @@ En el fichero __**coordenadas_RFM_ceros**__ en la carpeta __**python**__ encontr
 Para construir un DataFrame con Recencia, Frecuencia y Magnitud a partir de los valores de los terremotos tenemos primero que extraer los valores de fecha, coordenadas y magnitud de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**coordenadas_RFM_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**coordenadas_RFM_valores.csv.bz2**__ en la carpeta __**files**__.
 
 
-Una vez preparados estos ficheros, haremos la segmentación K-means. En este punto pasaremos a trabajar con R en vez de Python. La segmentación RFM con todas las coordenadas se desarrollará en el fichero __**Segmentacion_RFM_KMeans_coordenadas.R**__ en la carpeta __**R**__. ¿Qué haremos en este fichero? Primeramente, cargaremos los datos de __**coordenadas_RFM_valores.csv.bz2**__ y construiremos una tabla análoga a __**coordenadas_RFM_ceros.csv**__; fusionaremos estas dos tablas y sobre la tabla resultante (donde cada coordenada aparecerá un única vez) aplicaremos K-Means.
+Una vez preparados estos ficheros, haremos la segmentación K-means. En este punto pasaremos a trabajar con R en vez de Python. La segmentación RFM con todas las coordenadas se desarrollará en el fichero __**Segmentacion_RFM_KMeans_coordenadas.R**__ en la carpeta __**R**__. ¿Qué haremos en este fichero? Primeramente, cargaremos los datos de __**coordenadas_RFM_valores.csv.bz2**__ y construiremos una tabla análoga a __**coordenadas_RFM_ceros.csv**__; fusionaremos estas dos tablas y sobre la tabla resultante (donde cada coordenada aparecerá una única vez) aplicaremos K-Means.
 
 
 Una vez realizado el algoritmo K-means obtenemos 8 segmentos. En el próximo punto de la memoria interpretaremos estos resultados. Los datos con la segmentación RFM y el número de segmento se almacenan en el fichero __**terremotos_coordenadas_RFM**__ en la carpeta __**files**__.
 
 
 ![K-Means coordenadas](imagenes/Kmeans_coordenadas.jpg)
+
+![Segmentación RFM de coordenadas con 8 clusters](imagenes/Segmentacion RFM de coordenadas.png)
+
+
+Ahora pasamos a realizar la misma segmentación RFM pero en base a los países donde se producen los terremotos. Como en el caso de las coordenadas, nuestro objetivo será tener una tabla como la de abajo, ahora con países.
+
+| paises      | RECENCIA | FRECUENCIA | MAGNITUD |
+| :---------: | :------: | :--------: | :------: |
+| ITALY       | 1        | 11596      | 2.52     |
+| SPAIN       | 5        | 2164       | 2.83     |   
+
+
+Para obtener esta tabla seguiremos estos pasos:
+
+* 1) Construiremos una tabla inicial con todos los países donde Recencia, Frecuencia y Magnitud sean 0.
+
+* 2) A partir de los datos de terremotos, construiremos una tabla con valores Recencia, Frecuencia y Magnitud. Hay que tener en cuenta que no tenemos datos para todos los países.
+
+* 3) Fusionaremos las dos tablas previas de modo que los países solo aparezcan una vez.
+
+
+En el fichero __**paises_RFM_ceros**__ en la carpeta __**python**__ encontramos el código con la tabla inicial de coordenadas con Recencia, Frecuencia y Magnitud a 0. Guardamos el DataFrame creado como __**paises_RFM_ceros.csv**__ en la carpeta __**files**__. El listado de países lo obtenemos del fichero __**paises.csv**__ en la carpeta __**files**__.
+
+
+Para construir un DataFrame con Recencia, Frecuencia y Magnitud a partir de los valores de los terremotos tenemos primero que extraer los valores de fecha, paises y magnitud de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**paises_RFM_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**paises_RFM_valores.csv.bz2**__ en la carpeta __**files**__.

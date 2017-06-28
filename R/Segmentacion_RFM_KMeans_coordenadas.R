@@ -1,8 +1,10 @@
 ####Segmentacion RFM y K-Means para las coordenadas
 
-##Instalamos, si no está, la librería dplyr y la cargamos
+##Instalamos, si no está, la librerías dplyr y ROCR y las cargamos
 install.packages("dplyr")
+install.packages("ROCR")
 library(dplyr)
+library(ROCR)
 
 ##Modificamos a la ruta de nuestro proyecto
 setwd("C:/Users/Ruben/Desktop/Master KSCHOOL/TFM_TERREMOTOS/")
@@ -95,7 +97,19 @@ aggregate(RFM_TERREMOTOS_TODAS_COORDENADAS[,-1], by = list(Segmentos), mean)
 
 ##Incluimos una columna con el segmento
 RFM_TERREMOTOS_TODAS_COORDENADAS$Segmento <- Segmentos
-RFM_TERREMOTOS_TODAS_COORDENADAS
+head(RFM_TERREMOTOS_TODAS_COORDENADAS, n=+20L)
+
+
+##Representación gráfica RFM 
+png(paste("imagenes/Segmentacion RFM de coordenadas.png",sep=""),width = 1024, height = 880)
+par(mfrow=c(2, 2),oma = c(1, 0, 3, 0))
+plot(RFM_TERREMOTOS_TODAS_COORDENADAS$FRECUENCIA,RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA,col=Segmentos, xlab="FRECUENCIA", ylab="RECENCIA")
+plot(c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)),c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)), type="n", axes=F, xlab="", ylab="",xlim=c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)),ylim=c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)))
+legend(1,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)/2-1,legend=c(1:NUM_CLUSTERS),yjust = 0.5,col=c(1:NUM_CLUSTERS),pch=15,cex=2)
+plot(RFM_TERREMOTOS_TODAS_COORDENADAS$FRECUENCIA,RFM_TERREMOTOS_TODAS_COORDENADAS$MAGNITUD,col=Segmentos, xlab="FRECUENCIA",ylab="MAGNITUD")
+plot(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA,RFM_TERREMOTOS_TODAS_COORDENADAS$MAGNITUD,col=Segmentos, xlab="RECENCIA",ylab="MAGNITUD")
+mtext(paste("Clusterización kmeans de coordenadas mediante Modelo RFM 5 años",sep=""), outer = TRUE, cex = 2)
+dev.off()
 
 ##Guardamos el fichero con la segmentacióon RFM y los segmentos. Posteriormente se usará para tableau.
 write.csv(RFM_TERREMOTOS_TODAS_COORDENADAS,"files/terremotos_coordenadas_RFM.csv")
