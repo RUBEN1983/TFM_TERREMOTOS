@@ -204,7 +204,7 @@ Una vez realizado el algoritmo K-means obtenemos 8 segmentos. En el próximo pun
 
 ![K-Means coordenadas](imagenes/Kmeans_coordenadas.jpg)
 
-![Segmentación RFM de coordenadas con 8 clusters](imagenes/Segmentacion RFM de coordenadas.png)
+![Segmentación RFM de coordenadas con 8 clusters](imagenes/Segmentacion RFM de coordenadas.jpg)
 
 
 Ahora pasamos a realizar la misma segmentación RFM pero en base a los países donde se producen los terremotos. Como en el caso de las coordenadas, nuestro objetivo será tener una tabla como la de abajo, ahora con países.
