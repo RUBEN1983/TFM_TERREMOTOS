@@ -228,3 +228,18 @@ En el fichero __**paises_RFM_ceros**__ en la carpeta __**python**__ encontramos 
 
 
 Para construir un DataFrame con Recencia, Frecuencia y Magnitud a partir de los valores de los terremotos tenemos primero que extraer los valores de fecha, paises y magnitud de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**paises_RFM_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**paises_RFM_valores.csv.bz2**__ en la carpeta __**files**__.
+
+
+Una vez preparados estos ficheros, haremos la segmentación K-means en R. La segmentación RFM con todos los países se desarrollará en el fichero __**Segmentacion_RFM_KMeans_paises.R**__ en la carpeta __**R**__. Primeramente, cargaremos los datos de __**paises_RFM_valores.csv.bz2**__ y construiremos una tabla análoga a __**paises_RFM_ceros.csv**__; fusionaremos estas dos tablas y sobre la tabla resultante (donde cada país aparecerá una única vez) aplicaremos K-Means.
+
+
+Una vez realizado el algoritmo K-means obtenemos 5 segmentos. En el próximo punto de la memoria interpretaremos estos resultados, como en el caso de las coordenadas. Los datos con la segmentación RFM y el número de segmento se almacenan en el fichero __**terremotos_paises_RFM**__ en la carpeta __**files**__.
+
+
+![K-Means países](imagenes/Kmeans_paises.jpg)
+
+
+![Segmentación RFM de países con 5 clusters](imagenes/Segmentacion_RFM_de_paises.jpg)
+
+
+__3.2.-Predicción anual de número de terremotos por zonas geográficas.__
