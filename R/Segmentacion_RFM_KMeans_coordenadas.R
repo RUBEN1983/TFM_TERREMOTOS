@@ -101,7 +101,7 @@ head(RFM_TERREMOTOS_TODAS_COORDENADAS, n=+20L)
 
 
 ##Representación gráfica RFM 
-png(paste("imagenes/Segmentacion RFM de coordenadas.png",sep=""),width = 1024, height = 880)
+png(paste("imagenes/Segmentacion_RFM_de_coordenadas.png",sep=""),width = 1024, height = 880)
 par(mfrow=c(2, 2),oma = c(1, 0, 3, 0))
 plot(RFM_TERREMOTOS_TODAS_COORDENADAS$FRECUENCIA,RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA,col=Segmentos, xlab="FRECUENCIA", ylab="RECENCIA")
 plot(c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)),c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)), type="n", axes=F, xlab="", ylab="",xlim=c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)),ylim=c(0,max(RFM_TERREMOTOS_TODAS_COORDENADAS$RECENCIA)))
