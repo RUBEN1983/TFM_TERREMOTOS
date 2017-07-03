@@ -243,3 +243,30 @@ Una vez realizado el algoritmo K-means obtenemos 5 segmentos. En el próximo pun
 
 
 __3.2.-Predicción anual de número de terremotos por zonas geográficas.__
+
+
+Una vez realizada la segmentación, el siguiente paso del proyecto es realizar una predicción del número de terremotos. Como en el caso anterior, realizaremos la predicción en base a coordenadas y a los países.
+
+
+Aplicaremos varios modelos de predicción:
+
+* 1) Regresión logística.
+
+* 2) Random Forest lineal.
+
+* 3) Random Forest logístico.
+
+
+Para la __regresión logística__ usaremos una regresión de la familia Poisson. La distribución de Poisson es una distribución de probabilidad discreta; a partir de una frecuencia media, trata de predecir el número de veces que se repetirá un evento durante un período de tiempo. En el caso de nuestra regresión, el logaritmo del valor esperado es modelado a partir de una combinación lineal de las variables independientes; y el valor predicho seguirá una distribución de Poisson.
+
+__FALTA EXPLUIAR EL RANDOM FOREST__
+
+
+Primero vamos a realizar la predicción por coordenadas geográficas. Para poder hacer la predicción necesitamos una tabla donde cada coordenada sea una fila y en cada columna tengamos el número de terremotos cada año entre 1998 y 2016. Como en el caso de la segmentación, tendremos pares de coordenadas donde no se han producido terremotos. A diferencia de la segmentación, aquí no incluiremos en el modelo aquellos pares de coordenadas donde no tengamos datos. El entrenamiento de los datos y la posterior segmentación se realizará para aquellas coordenadas donde tengamos datos; para las que no tenemos terremotos, asumimos que la predicción será 0.
+
+
+Para construir un DataFrame con los terremotos por año tenemos que extraer los valores de año y coordenadas de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**coordenadas_prediccion_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**coordenadas_prediccion_valores.csv.bz2**__ en la carpeta __**files**__.
+
+
+
+

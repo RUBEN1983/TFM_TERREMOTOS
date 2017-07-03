@@ -314,6 +314,21 @@ $(document).ready(function () {
 <p class="caption">Segmentación RFM de países con 5 clusters</p>
 </div>
 <p><strong>3.2.-Predicción anual de número de terremotos por zonas geográficas.</strong></p>
+<p>Una vez realizada la segmentación, el siguiente paso del proyecto es realizar una predicción del número de terremotos. Como en el caso anterior, realizaremos la predicción en base a coordenadas y a los países.</p>
+<p>Aplicaremos varios modelos de predicción:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Regresión logística.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Random Forest lineal.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Random Forest logístico.</li>
+</ol></li>
+</ul>
+<p>Para la <strong>regresión logística</strong> usaremos una regresión de la familia Poisson. La distribución de Poisson es una distribución de probabilidad discreta; a partir de una frecuencia media, trata de predecir el número de veces que se repetirá un evento durante un período de tiempo. En el caso de nuestra regresión, el logaritmo del valor esperado es modelado a partir de una combinación lineal de las variables independientes; y el valor predicho seguirá una distribución de Poisson.</p>
+<p><strong>FALTA EXPLUIAR EL RANDOM FOREST</strong></p>
 
 
 
