@@ -199,7 +199,7 @@ Para construir un DataFrame con Recencia, Frecuencia y Magnitud a partir de los 
 Una vez preparados estos ficheros, haremos la segmentación K-means. En este punto pasaremos a trabajar con R en vez de Python. La segmentación RFM con todas las coordenadas se desarrollará en el fichero __**Segmentacion_RFM_KMeans_coordenadas.R**__ en la carpeta __**R**__. ¿Qué haremos en este fichero? Primeramente, cargaremos los datos de __**coordenadas_RFM_valores.csv.bz2**__ y construiremos una tabla análoga a __**coordenadas_RFM_ceros.csv**__; fusionaremos estas dos tablas y sobre la tabla resultante (donde cada coordenada aparecerá una única vez) aplicaremos K-Means.
 
 
-Una vez realizado el algoritmo K-means obtenemos 8 segmentos. En el próximo punto de la memoria interpretaremos estos resultados. Los datos con la segmentación RFM y el número de segmento se almacenan en el fichero __**terremotos_coordenadas_RFM**__ en la carpeta __**files**__.
+Una vez realizado el algoritmo K-means obtenemos 8 segmentos. En el próximo punto de la memoria interpretaremos estos resultados. Los datos con la segmentación RFM y el número de segmento se almacenan en el fichero __**terremotos_coordenadas_RFM.csv**__ en la carpeta __**files**__.
 
 
 ![K-Means coordenadas](imagenes/Kmeans_coordenadas.jpg)
@@ -233,7 +233,7 @@ Para construir un DataFrame con Recencia, Frecuencia y Magnitud a partir de los 
 Una vez preparados estos ficheros, haremos la segmentación K-means en R. La segmentación RFM con todos los países se desarrollará en el fichero __**Segmentacion_RFM_KMeans_paises.R**__ en la carpeta __**R**__. Primeramente, cargaremos los datos de __**paises_RFM_valores.csv.bz2**__ y construiremos una tabla análoga a __**paises_RFM_ceros.csv**__; fusionaremos estas dos tablas y sobre la tabla resultante (donde cada país aparecerá una única vez) aplicaremos K-Means.
 
 
-Una vez realizado el algoritmo K-means obtenemos 5 segmentos. En el próximo punto de la memoria interpretaremos estos resultados, como en el caso de las coordenadas. Los datos con la segmentación RFM y el número de segmento se almacenan en el fichero __**terremotos_paises_RFM**__ en la carpeta __**files**__.
+Una vez realizado el algoritmo K-means obtenemos 5 segmentos. En el próximo punto de la memoria interpretaremos estos resultados, como en el caso de las coordenadas. Los datos con la segmentación RFM y el número de segmento se almacenan en el fichero __**terremotos_paises_RFM.csv**__ en la carpeta __**files**__.
 
 
 ![K-Means países](imagenes/Kmeans_paises.jpg)
@@ -259,14 +259,46 @@ Aplicaremos varios modelos de predicción:
 
 Para la __regresión logística__ usaremos una regresión de la familia Poisson. La distribución de Poisson es una distribución de probabilidad discreta; a partir de una frecuencia media, trata de predecir el número de veces que se repetirá un evento durante un período de tiempo. En el caso de nuestra regresión, el logaritmo del valor esperado es modelado a partir de una combinación lineal de las variables independientes; y el valor predicho seguirá una distribución de Poisson.
 
-__FALTA EXPLUIAR EL RANDOM FOREST__
+
+Para las predicciones 2 y 3 utilizaremos la técnica de __Random Forest (bosques aleatorios)__. La técnica consiste básicamente en un promedio de varios árboles de decisión, pero, ¿qué son los árboles de decisión? Los árboles de decisión son modelos de predicción donde a partir de unos datos de entrada y aplicando un conjunto de condiciones obtenemos finalmente el valor predicho. Cuando combinamos varios árboles de decisión y obtenemos el promedio, estamos aplicando la técnica de Random Forest. La diferencia entre las predicciones 2 y 3 radica en que la 3 usa el logaritmo.
+
+
+![Árbol de decisión](imagenes/arbol_decision.jpg)
 
 
 Primero vamos a realizar la predicción por coordenadas geográficas. Para poder hacer la predicción necesitamos una tabla donde cada coordenada sea una fila y en cada columna tengamos el número de terremotos cada año entre 1998 y 2016. Como en el caso de la segmentación, tendremos pares de coordenadas donde no se han producido terremotos. A diferencia de la segmentación, aquí no incluiremos en el modelo aquellos pares de coordenadas donde no tengamos datos. El entrenamiento de los datos y la posterior segmentación se realizará para aquellas coordenadas donde tengamos datos; para las que no tenemos terremotos, asumimos que la predicción será 0.
 
 
-Para construir un DataFrame con los terremotos por año tenemos que extraer los valores de año y coordenadas de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**coordenadas_prediccion_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**coordenadas_prediccion_valores.csv.bz2**__ en la carpeta __**files**__.
+Para construir un DataFrame con los terremotos por año tenemos que extraer los valores de año y coordenadas de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**coordenadas_prediccion_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**coordenadas_prediccion_valores.csv**__ en la carpeta __**files**__.
+
+
+Una vez preparados estos ficheros, haremos la predicción en R. La predicción se hará en el fichero __**coordenadas_prediccion.R**__ en la carpeta __**R**__. Primeramente, cargaremos los datos de __**coordenadas_prediccion_valores.csv**__ para construir una tabla con el número de terremotos que se producen anualmente.
+
+
+Para evaluar la fiabilidad de la predicción utilizaremos la fórmula RMSPE (Root Mean Square Percentage Error).
+
+
+![RMSPE](imagenes/rmspe.jpg)
+
+
+En esta fórmula n será el número de valores predichos, y será el valor con el que estamos comparando (en este caso la media de terremotos en una coordenada entre 1998 y 2016) e ŷ será el valor predicho. 
+
+
+Los datos con la predicción se almacenarán en el fichero __**prediccion_terremotos_coordenadas.csv**__ en la carpeta __**files**__.
+
+
+Nuevamente, haremos la misma predicción con los países. Análogamente a las coordenadas, crearemos una tabla con todos los países y con el número de terremotos registrados entre 1998 y 2016.
+
+
+Para construir un DataFrame con los terremotos por año tenemos que extraer los valores de año y países de los terremotos y guardarlos en un fichero. Este código está explicado en el fichero __**paises_prediccion_valores**__ en la carpeta __**python**__. Guardamos el fichero generado en __**paises_prediccion_valores.csv**__ en la carpeta __**files**__.
+
+
+
+Una vez preparados estos ficheros, volvemos nuevamente a R. La predicción se hará en el fichero __**paises_prediccion.R**__ en la carpeta __**R**__. Primeramente, cargaremos los datos de __**paises_prediccion_valores.csv**__ para construir una tabla con el número de terremotos que se producen anualmente. Una vez hagamos la predicción, los datos se almacenarán en el fichero __**prediccion_terremotos_paises.csv**__ en la carpeta __**files**__.
 
 
 
 
+
+
+**4.-RESUMEN DE LOS RESULTADOS.**
