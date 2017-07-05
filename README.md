@@ -302,3 +302,91 @@ Una vez preparados estos ficheros, volvemos nuevamente a R. La predicción se ha
 
 
 **4.-RESUMEN DE LOS RESULTADOS.**
+
+
+Una vez realizados los estudios K-Means y la predicción de los terremotos para coordenadas y países, pasaremos a interpretar los resultados obtenidos.
+
+
+Empezaremos con K-means. Para las coordenadas hemos hecho una segmentación con 8 clusters; se ha elegido este número porque es la primera cantidad para la que se aislan aquellas coordenadas donde no se producen terremotos. La segmentación se ha hecho con los terremotos producidos entre 2012 y 2016 sobre un total de 64800 coordenadas que corresponden con los pares latitud-longitud.
+
+
+![K-Means coordenadas](imagenes/Kmeans_coordenadas.jpg)
+
+
+Vamos a analizar cada uno de los clusters empezando por aquellos donde los terremotos son mas frecuentes.
+
+**Cluster 1:** Es el grupo menos numeroso, pues solo encuadra a 8 pares de coordenadas del total. Con diferencia es el grupo donde los terremotos son más frecuentes, pues presentan una media de 2931,38 terremotos en los últimos 5 años y 3,38 días de producirse el último seísmo. La magnitud media de los movimientos sísmicos es 2,58.
+
+
+**Cluster 2:** Si vamos al segundo grupo en cuanto a frecuencia, nos encontramos con el cluster 2. Engloba a un total de 67 pares de coordenadas con una media de 948,81 terremotos entre 2012 y 2016, 11,96 días desde el último terremoto y una magnitud ligeramente mayor que en el cluster anterior; 2,7.
+
+
+**Cluster 4:** El cluster 4 encuadra a 1324 pares de coordenadas con una media de 57,02 terremotos, 80,31 días de media desde el último terremoto y una magnitud media de 2,74.
+
+
+**Cluster 5:** Con el cluster 5 vamos ya estudiando coordenadas donde los terremotos no son tan habituales. Engloba a 2232 pares de coordenadas con una frecuencia media de 11,39 terremotos, una recencia media de 125,91 días y una magnitud media de 4,49. Este segmento contiene las coordenadas donde los sismos son más potentes.
+
+
+**Cluster 3:** El cluster 3 incluye 1238 pares de coordenadas con 3,68 terremotos de media, una recencia media de 495,36 y una magnitud media de 4,1.
+
+
+**Cluster 6:** Incluye 899 pares de coordenadas con 2,36 terremotos de media, 995,51 días de media desde el último terremoto (casi 3 años) y una magnitud media de 4,33.
+
+
+**Cluster 7:** Llegamos al último cluster con coordenadas donde se producen terremotos. Incluye 601 pares de coordenadas con 1,5 terremotos de media, 1515,23 días de media desde el último terremoto (4 años y medio) y una magnitud media de 4,44.
+
+
+**Cluster 8:** Finalmente tenemos el cluster con las coordenadas donde no se producen terremotos. Engloba 58431 de un total de 64800 coordenadas, es decir, el 90%. Como no tenemos registrados terremotos en los últimos 5 años para estas coordenadas, Recencia, Frecuencia y Magnitud tienen un valor de 0.
+
+
+Para el caso de los países se ha realizado una segmentación con 5 clusters; se han elegido 5 exactamente por el mismo motivo que con las coordenadas; ya que un cluster engloba a los países donde no se han producido terremotos. Disponemos de los terremotos entre 2012 y 2016 de 248 países.
+
+
+![K-Means países](imagenes/Kmeans_paises.jpg)
+
+
+De mayor a menor frecuencia:
+
+
+**Cluster 2:** Incluye 4 países donde los terremotos se producen más frecuentemente. La media de terremotos entre 2012 y 2016 es 27071,5, la recencia media del último seísmo es 1 día y la magnitud media es 2,77.
+
+
+**Cluster 1:** Incluye 56 países con 1048,8 terremotos de media, una recencia media de 31,2 días y una magnitud media de 2,89.
+
+
+**Cluster 3:** Incluye 89 países con 319,7 terremotos de media, 115,18 días de media desde el último terremoto y una magnitud media de 4,46.
+
+
+**Cluster 4:** Incluye 14 países con ligera actividad sísmica. El último terremoto producido sucedió 1121,64 días atrás (más de 3 años), han ocurrido 2,29 terremotos en los últimos 5 años con una magnitud media de 4,4.
+
+
+**Cluster 5:** Engloba 85 países donde no se han producido movimientos sísmicos entre 2012 y 2016; por tanto, recencia, frecuencia y magnitud valen 0.
+
+
+Una vez indicada las características de los clusters, podemos extraer varias conclusiones:
+
+* 1) Se cumple una de las premisas iniciales; los terremotos se producen repetidamente en los mismos sitios. Apreciamos claramente que hay países y ciertas coordenadas concretas donde la actividad sísmica es prácticamente contínua.
+
+
+* 2) Hay zonas del mundo donde apenas hay actividad sísmica. Si bien en el análisis de los países no resulta tan evidente, vemos un 90% de los pares de coordenadas donde no tenemos registro de actividad sísmica entre 2012 y 2016.
+
+
+* 3) En aquellas zonas donde los terremotos son más frecuentes, la media de la magnitud es más baja que en aquellos sitios que no son tan habituales. Esto nos da a inducir que en aquellas zonas donde los terremotos son más potentes no se producen tantos terremotos de pequeña magnitud (menores de 3 grados). Podemos ver claras diferencias de magnitud para las coordenadas entre los segmentos 3, 5, 6 y 7 y el resto; para los países vemos esta misma diferencia entre los segmentos 3 y 4 y el resto.
+
+
+En cuanto a las predicciones anuales de número de terremotos, el análisis consistirá en determinar cual de nuestras predicciones es más exacta. Como indicamos anteriormente, para determinar la exactitud de la predicción usaremos la fórmula RMSPE comparando cada una de las predicciones con la media de terremotos producidos en cada país y cada coordenada entre 1998 y 2016.
+
+
+![](imagenes/rmspe.jpg)
+
+
+Para el caso de las coordenadas obtenemos un valor de 0,464 para la regresión logística, 0,04 para el RandomForest lineal y 0,416 para el RandomForest logístico.
+
+
+Y para el caso de los países, 10,813 para la regresión logística, 0,231 para el RandomForest lineal y 0,375 para el RandomForest logístico.
+
+
+Por tanto, en ambos casos, la predicción más fiable sería el **RandomForest lineal**.
+
+
+**4.-VISUALIZACIÓN DE LOS RESULTADOS.**
