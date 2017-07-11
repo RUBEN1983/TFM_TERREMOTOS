@@ -389,4 +389,7 @@ Y para el caso de los países, 10,813 para la regresión logística, 0,231 para 
 Por tanto, en ambos casos, la predicción más fiable sería el **RandomForest lineal**.
 
 
-**4.-VISUALIZACIÓN DE LOS RESULTADOS.**
+**5.-VISUALIZACIÓN DE LOS RESULTADOS.**
+
+
+
