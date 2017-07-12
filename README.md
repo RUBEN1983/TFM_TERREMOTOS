@@ -407,3 +407,9 @@ El dashboard generado con Tableau para la segmentación RFM de las coordenadas s
 
 El proceso será exactamente el mismo para el caso de la segmentación RFM de los países, solo que no es necesaria ninguna transformación previa. Partiremos del fichero __**terremotos_paises_RFM.csv**__ en la carpeta __**tableau**__. Cargado este csv en Tableau, se vuelve a generar un mapamundi con latitud y longitud; incluyendo países y magnitud en Detalles y segmento en Colores, de tal modo que cada país queda coloreado de acuerdo a su segmento. Este dashboard se guarda en la carpeta __**tableau**__ en el fichero __**segmentacion_RFM_paises.twb**__.
 
+
+Utilizaremos para representar las predicciones también 2 dashboards, uno para coordenadas y otro para países. Para las coordenadas, nuevamente modificaremos las columnas para que latitud y longitud aparezcan en columnas distintas con el fichero __**preparacion_ficheros_tableau.ipynb**__ en la carpeta __**python**__. El fichero resultante con el que trabajaremos en Tableau será __**terremotos_latitud_longitud_prediccion_tableau.csv**__ se guardará en la carpeta __**tableau**__.
+
+
+Una vez cargado el fichero __**terremotos_latitud_longitud_prediccion_tableau.csv**__ en Tableau, crearemos tres hojas de trabajo, una para cada predicción (regresión logistica, RF lineal y RF logístico). Con latitud y longitud crearemos un mapa, incluyendo el campo coordenadas en Detalles y las predicciones en Colores. Las coordenadas sin terremotos no se representarán, las que tengan pocos (hay que tener en cuenta que la mayoría son valores pequeños) serán en azul claro aumentando gradualmente hasta el color naranja para las zonas con mayor incidencia de terremotos. Finalmente, se crea un dashboard con los 3 mapas, estableciendo arriba la predicción de RF lineal, que anteriormente se concluyó como la más fidedigna. El dashboard se guardará en el documento __**prediccion_terremotos_coordenadas.twb**__ en la carpeta __**tableau**__.
+
