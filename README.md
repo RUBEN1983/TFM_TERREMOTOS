@@ -392,4 +392,18 @@ Por tanto, en ambos casos, la predicción más fiable sería el **RandomForest l
 **5.-VISUALIZACIÓN DE LOS RESULTADOS.**
 
 
+Para la visualización de los resultados, utilizaremos varios dashboards de **Tableau**. Básicamente, todos los dashboards serán mapas del mundo donde aparecerán distintos datos sobre los terremotos por zonas geógraficas.
+
+
+Primeramente, utilizaremos 2 dashboards para representar la segmentación RFM; uno para coordenadas y otro para países.
+
+
+Para el caso de las coordenadas (también ocurrirá para las predicciones), necesitamos preparar el fichero de modo que latitud y longitud aparezcan en columnas distintas. Esta modificación se hará con Python en el fichero __**preparacion_ficheros_tableau.ipynb**__ en la carpeta __**python**__. El fichero resultante con el que trabajaremos en Tableau será __**terremotos_latitud_longitud_RFM_tableau.csv**__ se guardará en la carpeta __**tableau**__.
+
+
+Una vez se carga este csv en Tableau, se generará un mapa del mundo con la latitud y la longitud como medidas, la magnitud media de los terremotos en cada coordenada se introducirá como Detalle y los distintos segmentos, la clave de la segmentación RFM, se introducirán como Colores en cada coordenada. La segmentación está hecha sobre todas las coordenadas del mundo pero el segmento 8 no estará representado, ya que corresponde con las zonas donde no se han producido terremotos.
+El dashboard generado con Tableau para la segmentación RFM de las coordenadas se ha guardado en la carpeta __**tableau**__ en el fichero __**segmentacion_RFM_coordenadas.twb**__.
+
+
+El proceso será exactamente el mismo para el caso de la segmentación RFM de los países, solo que no es necesaria ninguna transformación previa. Partiremos del fichero __**terremotos_paises_RFM.csv**__ en la carpeta __**tableau**__. Cargado este csv en Tableau, se vuelve a generar un mapamundi con latitud y longitud; incluyendo países y magnitud en Detalles y segmento en Colores, de tal modo que cada país queda coloreado de acuerdo a su segmento. Este dashboard se guarda en la carpeta __**tableau**__ en el fichero __**segmentacion_RFM_paises.twb**__.
 
