@@ -7,9 +7,6 @@ library(reshape2)
 library(randomForest)
 
 
-##Modificamos a la ruta de nuestro proyecto
-setwd("C:/Users/Ruben/Desktop/Master KSCHOOL/TFM_TERREMOTOS/")
-dir()
 
 ###Cargamos los datos con los terremotos de 1998 a 2016
 terremotos_coordenadas <- read.csv('files/coordenadas_prediccion_valores.csv',sep = ';')

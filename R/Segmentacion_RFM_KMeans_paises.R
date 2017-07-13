@@ -6,11 +6,6 @@ install.packages("ROCR")
 library(dplyr)
 library(ROCR)
 
-##Modificamos a la ruta de nuestro proyecto
-setwd("C:/Users/Ruben/Desktop/Master KSCHOOL/TFM_TERREMOTOS/")
-dir()
-
-
 ##Cargamos el DF con todos los paises y valores RFM a 0
 dataframe_RFM_paises_vacios <- read.csv("files/paises_RFM_ceros.csv", sep=";")
 head(dataframe_RFM_paises_vacios)

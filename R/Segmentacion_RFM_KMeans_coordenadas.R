@@ -6,10 +6,6 @@ install.packages("ROCR")
 library(dplyr)
 library(ROCR)
 
-##Modificamos a la ruta de nuestro proyecto
-setwd("C:/Users/Ruben/Desktop/Master KSCHOOL/TFM_TERREMOTOS/")
-dir()
-
 
 ##Cargamos el DF con todas las coordenadas y valores RFM a 0
 dataframe_RFM_coordenadas_vacias <- read.csv("files/coordenadas_RFM_ceros.csv", sep=";")
